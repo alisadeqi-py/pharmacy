@@ -28,6 +28,15 @@ DEBUG = config('DEBUG' , default = False , cast = bool )
 
 ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [s.strip() for s in v.split(',') ] , default = '*')
 
+# eamil settings
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER ='sadeqiali2000@gmail.com'
+EMAIL_HOST_PASSWORD = 'xqnoixcsysyurfzc'
+
+#DEFAULT_FROM_EMAIL = 'testmail@gmail.com'
 
 # Application definition
 
@@ -48,6 +57,7 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'django_filters',
     'payment.apps.PaymentConfig',
+    'mail_templated'
 
 ]
 
@@ -66,7 +76,7 @@ ROOT_URLCONF = 'core.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': ['templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

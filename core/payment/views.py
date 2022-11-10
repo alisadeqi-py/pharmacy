@@ -8,8 +8,10 @@ from django.shortcuts import redirect
 import requests
 import json
 from cart.models import Cart
-
-
+from mail_templated import send_mail
+from rest_framework import generics
+from rest_framework.response import Response
+from core import settings
 
 MERCHANT = 'XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX'
 ZP_API_REQUEST = "https://api.zarinpal.com/pg/v4/payment/request.json"
@@ -77,3 +79,18 @@ def verify(request):
             return HttpResponse(f"Error code: {e_code}, Error Message: {e_message}")
     else:
         return HttpResponse('Transaction failed or canceled by user')
+
+
+class TestEmail(generics.GenericAPIView):
+
+    def get(self , request , *args, **kwargs):
+        
+
+        send_mail('email/emailtemp.tpl', {'name': 'ali'}, 'sadeqiali2000@gamil.com', ['engsadeghi78@gmail.com'])
+        
+        return Response('email sent')
+
+
+
+
+

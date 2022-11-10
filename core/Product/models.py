@@ -18,6 +18,7 @@ class Product(models.Model):
     M_taking = models.TextField()
     description = models.TextField()
     status = models.BooleanField(default=False)
+    special = models.BooleanField(default=False)
     create_date = models.DateTimeField(auto_now=True)
     Update_date = models.DateTimeField(auto_now_add =True)
     price = models.BigIntegerField()

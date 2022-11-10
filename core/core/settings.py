@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'Product.apps.ProductConfig',
     'account.apps.AccountConfig',
     'course.apps.CourseConfig',
+    'main',
     'drf_yasg',
     'cart.apps.CartConfig',
     'rest_framework.authtoken',

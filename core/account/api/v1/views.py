@@ -4,8 +4,12 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework import status
 from rest_framework import generics
-from .serializers import RegistrationSerializer , UserUpdateSerializer , ChangePasswordSerialier
+from .serializers import RegistrationSerializer , UserUpdateSerializer , ChangePasswordSerialier , CartSerializers
 from ...models import User
+from cart.models import Cart
+from django.shortcuts import get_object_or_404
+
+
 
 class RegistrationApiView(generics.GenericAPIView):
     serializer_class = RegistrationSerializer
@@ -91,19 +95,13 @@ class CustomDiscardAuthToken(APIView):
 
         return Response(status=status.HTTP_204_NO_CONTENT)
 
-""" class ResetPassword(APIView):
-    serializer_class = ResetPassword
+class CartView(generics.GenericAPIView):
+
+    serializer_class = CartSerializers
     permission_classes = [IsAuthenticated]
-
-    def patch(self , request , *args, **kwargs):
-        serializer = self.serializer_class(data = request.data , context = {'kwargs': kwargs})
-
-        serializer.is_valid(raise_exeption = True)
-
-        return response(
-            {'message' : 'password reset compelet'} , status.HTTP_200_OK
-        )
-
-
- """
-
+    def get(self , request , *args, **kwargs):
+        #print(request.user.id)
+        user = User.objects.get(id = request.user.id)
+        carts = get_object_or_404( Cart, user = user)
+        serializer = CartSerializers(carts)
+        return Response(serializer.data)

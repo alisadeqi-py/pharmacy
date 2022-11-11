@@ -1,12 +1,13 @@
 from django.contrib import admin
 from django.urls import include, path
 from rest_framework.authtoken import views
-from .views import CustomDiscardAuthToken , RegistrationApiView , UserUpdateApiView , ChangePasswordApiView
+from .views import CustomDiscardAuthToken , RegistrationApiView , UserUpdateApiView , ChangePasswordApiView , CartView
 urlpatterns = [
     #registration 
     path('registration/' , RegistrationApiView.as_view() , name='registration'),
     path('update/' , UserUpdateApiView.as_view() , name='UserUpdate'),
     path('changepass/' , ChangePasswordApiView.as_view() , name = 'reserpassword'),
+    path('carts' , CartView.as_view() , name = 'Cart'),
 
    
     #auth_token 

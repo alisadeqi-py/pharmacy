@@ -2,7 +2,7 @@ from rest_framework import serializers
 from ...models import User
 from django.core import exceptions
 from  django.contrib.auth.password_validation import validate_password
-
+from cart.models import Cart
 class RegistrationSerializer(serializers.ModelSerializer):
 
     password1 = serializers.CharField(max_length=12 , write_only=True)
@@ -52,4 +52,12 @@ class ChangePasswordSerialier(serializers.Serializer):
             raise serializers.ValidationError({"new_password": list(e.messages)})
 
         return super().validate(attrs)
+
+
+class CartSerializers(serializers.ModelSerializer):
+
+    class Meta:
+        model = Cart
+
+        fields = '__all__'
         
